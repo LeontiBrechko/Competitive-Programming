@@ -1,4 +1,6 @@
-package tasks;
+package test.on2017_01.on2017_01_25_Educational_Codeforces_Round_17.A___k_th_divisor0;
+
+
 
 
 

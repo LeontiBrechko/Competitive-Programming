@@ -3,9 +3,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.StringTokenizer;
+import java.math.BigInteger;
 import java.io.IOException;
 import java.io.BufferedReader;
-import java.util.Collections;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.io.InputStream;
@@ -22,39 +22,52 @@ public class Main {
         OutputStream outputStream = System.out;
         InputReader in = new InputReader(inputStream);
         PrintWriter out = new PrintWriter(outputStream);
-        TaskC solver = new TaskC();
+        TaskD solver = new TaskD();
         solver.solve(1, in, out);
         out.close();
     }
 
     static
     @SuppressWarnings("Duplicates")
-    class TaskC {
+    class TaskD {
         public void solve(int testNumber, InputReader in, PrintWriter out) {
-            String a = in.next();
-            String b = in.next();
-            int al = a.length();
-            int bl = b.length();
+            long n = in.nextLong();
+            String k = in.next();
 
-            int l = -1;
-            int r = bl;
-            ArrayList<Integer> li = new ArrayList<>();
-            ArrayList<Integer> ri = new ArrayList<>();
-
-            for (int i = 0; i < al && l < bl - 1; i++) {
-                if (a.charAt(i) == b.charAt(l + 1)) {
-                    l++;
-                    li.add(i);
-                }
-            }
-            for (int i = al - 1; i >= 0 && r > 0; i--) {
-                if (a.charAt(i) == b.charAt(r - 1)) {
-                    r--;
-                    ri.add(i);
-                }
+            if (n <= 10) {
+                out.print(new BigInteger(k, (int) n).toString());
+                return;
             }
 
-            Collections.sort(ri);
+            long res = 0;
+            long next = -1;
+            int j, z;
+            String nextSub;
+            ArrayList<Long> numbers = new ArrayList<>();
+            for (int i = k.length() - 1; i >= 0; ) {
+                j = i;
+                while (j >= 0 && (next = Long.parseLong(k.substring(j, i + 1))) < n)
+                    j--;
+                if (next >= n) {
+                    nextSub = k.substring(Math.min(j + 1, i), i + 1);
+                    next = Long.parseLong(nextSub);
+                    z = 0;
+                    while (z < nextSub.length() && nextSub.charAt(z) == '0') {
+                        j++;
+                        z++;
+                        next = Long.parseLong(k.substring(Math.min(j + 1, i), i + 1));
+                    }
+                    if (next == 0) i--;
+                    else i = Math.min(i, j);
+                } else if (next == 0) {
+                    i--;
+                } else i = j - 1;
+                numbers.add(next);
+            }
+            for (int i = numbers.size() - 1; i >= 0; i--) {
+                res = res * n + numbers.get(i);
+            }
+            out.print(res);
         }
 
     }
@@ -65,6 +78,10 @@ public class Main {
 
         public InputReader(InputStream in) {
             reader = new BufferedReader(new InputStreamReader(in));
+        }
+
+        public long nextLong() {
+            return Long.parseLong(next());
         }
 
         public String next() {
