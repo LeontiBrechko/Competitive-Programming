@@ -29,53 +29,40 @@ public class Main {
     static
     @SuppressWarnings("Duplicates")
     class TaskC {
+        private static final int INF = Integer.MAX_VALUE / 4;
+
         public void solve(int testNumber, InputReader in, PrintWriter out) {
-            String a = in.next();
-            String b = in.next();
-            int aLen = a.length();
-            int bLen = b.length();
+            int n = in.nextInt();
+            int m = in.nextInt();
+            char[][] strings = new char[n][m];
+            for (int i = 0; i < n; i++) strings[i] = in.next().toCharArray();
 
-            int INF = Integer.MAX_VALUE / 2;
+            int[][] info = new int[n][3];
+            for (int i = 0; i < n; i++) Arrays.fill(info[i], INF);
 
-            int[] p = new int[bLen + 1];
-            int[] s = new int[bLen + 1];
-            Arrays.fill(p, INF);
-            Arrays.fill(s, INF);
-            p[0] = 0;
-            s[bLen] = 0;
-
-            for (int i = 0, j = 1; i < aLen && j <= bLen; i++) {
-                if (a.charAt(i) == b.charAt(j - 1)) {
-                    p[j] = i + 1;
-                    j++;
-                }
-            }
-            for (int i = aLen - 1, j = bLen - 1; i >= 0 && j >= 0; i--) {
-                if (a.charAt(i) == b.charAt(j)) {
-                    s[j] = aLen - i;
-                    j--;
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
+                    if (strings[i][j] >= '0' && strings[i][j] <= '9')
+                        info[i][0] = Math.min(info[i][0], Math.min(j, m - j));
+                    else if (strings[i][j] >= 'a' && strings[i][j] <= 'z')
+                        info[i][1] = Math.min(info[i][1], Math.min(j, m - j));
+                    else info[i][2] = Math.min(info[i][2], Math.min(j, m - j));
                 }
             }
 
-            int low, high, mid, currentRes, resStart = 0, resFinish = bLen;
-            for (int i = 0; i <= bLen && p[i] != INF; i++) {
-                low = i;
-                high = bLen;
-                currentRes = high;
-                while (low < high) {
-                    mid = (low + high) >>> 1;
-                    if (p[i] + s[mid] <= aLen) {
-                        currentRes = Math.min(currentRes, mid);
-                        high = mid;
-                    } else low = mid + 1;
-                }
-                if (currentRes - i < resFinish - resStart) {
-                    resFinish = currentRes;
-                    resStart = i;
+            int res = INF;
+            int currentRes;
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    for (int k = 0; k < n; k++) {
+                        currentRes = info[i][0] + info[j][1] + info[k][2];
+                        if (i == j || j == k || i == k) currentRes = INF;
+                        res = Math.min(currentRes, res);
+                    }
                 }
             }
-            String res = b.substring(0, resStart) + (resFinish < bLen ? b.substring(resFinish, bLen) : "");
-            out.print(res.equals("") ? "-" : res);
+
+            out.print(res);
         }
 
     }
@@ -86,6 +73,10 @@ public class Main {
 
         public InputReader(InputStream in) {
             reader = new BufferedReader(new InputStreamReader(in));
+        }
+
+        public int nextInt() {
+            return Integer.parseInt(next());
         }
 
         public String next() {
