@@ -2,11 +2,12 @@ import java.io.OutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 import java.io.IOException;
 import java.io.BufferedReader;
+import java.util.ArrayDeque;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.io.InputStream;
 
 /**
@@ -29,64 +30,65 @@ public class Main {
     static
     @SuppressWarnings("Duplicates")
     class TaskC {
-        private static final long INF = Long.MAX_VALUE / 2L;
-        int n;
-        int m;
-        int k;
-        int[] c;
-        int[][] p;
-        long[][][] dp;
-
         public void solve(int testNumber, InputReader in, PrintWriter out) {
-            n = in.nextInt();
-            m = in.nextInt();
-            k = in.nextInt();
-            c = in.nextIntArray(n);
-            p = new int[n][m];
+            int n = in.nextInt();
+            ArrayList<Integer>[] adj = new ArrayList[n];
+            for (int i = 0; i < n; i++) adj[i] = new ArrayList<>();
+            int u, v;
+            for (int i = 0; i < n - 1; i++) {
+                u = in.nextInt() - 1;
+                v = in.nextInt() - 1;
+                adj[u].add(v);
+                adj[v].add(u);
+            }
+            int[] c = new int[n];
+            for (int i = 0; i < n; i++) c[i] = in.nextInt();
             for (int i = 0; i < n; i++) {
-                for (int j = 0; j < m; j++) {
-                    p[i][j] = in.nextInt();
-                }
-            }
-
-            dp = new long[2][k + 1][m];
-            for (int i = 0; i < 2; i++) {
-                for (int j = 0; j < k + 1; j++) {
-                    Arrays.fill(dp[i][j], INF);
-                }
-            }
-
-            if (c[0] == 0) for (int i = 0; i < m; i++) dp[0][1][i] = p[0][i];
-            else dp[0][1][c[0] - 1] = 0;
-
-            int nextIndex = 0;
-            for (int i = 1; i < n; i++) {
-                nextIndex ^= 1;
-                for (int j = 0; j < k + 1; j++) Arrays.fill(dp[nextIndex][j], INF);
-                for (int j = 1; j < k + 1; j++) {
-                    if (c[i] == 0) {
-                        for (int l = 0; l < m; l++) {
-                            dp[nextIndex][j][l] =
-                                    Math.min(dp[nextIndex][j][l], dp[nextIndex ^ 1][j][l] + p[i][l]);
-                            for (int o = 0; o < m; o++)
-                                if (o != l)
-                                    dp[nextIndex][j][l] =
-                                            Math.min(dp[nextIndex][j][l], dp[nextIndex ^ 1][j - 1][o] + p[i][l]);
-                        }
-                    } else {
-                        dp[nextIndex][j][c[i] - 1] =
-                                Math.min(dp[nextIndex][j][c[i] - 1], dp[nextIndex ^ 1][j][c[i] - 1]);
-                        for (int l = 0; l < m; l++) {
-                            if (l != c[i] - 1) dp[nextIndex][j][c[i] - 1] =
-                                    Math.min(dp[nextIndex][j][c[i] - 1], dp[nextIndex ^ 1][j - 1][l]);
+                for (Integer j : adj[i]) {
+                    if (c[i] != c[j]) {
+                        if (dfs(n, adj, c, i)) {
+                            out.printf("YES\n%d", i + 1);
+                            return;
+                        } else if (dfs(n, adj, c, j)) {
+                            out.printf("YES\n%d", j + 1);
+                            return;
+                        } else {
+                            out.print("NO");
+                            return;
                         }
                     }
                 }
             }
 
-            long res = INF;
-            for (int i = 0; i < m; i++) res = Math.min(res, dp[nextIndex][k][i]);
-            out.print(res == INF ? -1 : res);
+            out.print("YES\n1");
+        }
+
+        private boolean dfs(int n, ArrayList<Integer>[] adj, int[] c, int root) {
+            boolean[] isVisited;
+            ArrayDeque<Integer> stack;
+            int u;
+
+            for (Integer i : adj[root]) {
+                isVisited = new boolean[n];
+                stack = new ArrayDeque<>();
+                isVisited[root] = true;
+                isVisited[i] = true;
+                stack.push(i);
+                boolean isOk = true;
+                while (!stack.isEmpty()) {
+                    if (!isOk) break;
+                    u = stack.poll();
+                    for (Integer v : adj[u]) {
+                        if (!isVisited[v]) {
+                            isOk = isOk && c[v] == c[i];
+                            isVisited[v] = true;
+                            stack.push(v);
+                        }
+                    }
+                }
+                if (!isOk) return false;
+            }
+            return true;
         }
 
     }
@@ -97,14 +99,6 @@ public class Main {
 
         public InputReader(InputStream in) {
             reader = new BufferedReader(new InputStreamReader(in));
-        }
-
-        public int[] nextIntArray(int size) {
-            int[] array = new int[size];
-            for (int i = 0; i < size; ++i) {
-                array[i] = nextInt();
-            }
-            return array;
         }
 
         public int nextInt() {
