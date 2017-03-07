@@ -1,0 +1,37 @@
+21 C - Dishonest Sellers
+6 SINGLE
+8 STANDARD
+-1
+8 STANDARD
+-1
+2
+0
+16 3 1
+5 4 6
+3 1 5
+
+3 10
+
+1
+1
+26 5 3
+3 4 7 10 3
+4 5 5 12 5
+
+3 25
+
+1
+9 src/tasks
+8 -Xmx256M
+4 Main
+86 test.on2017_03.on2017_03_07_Codeforces_Round__402__Div__2_.C___Dishonest_Sellers.TaskC
+39 net.egork.chelper.checkers.TokenChecker
+0 
+0
+10 2017.03.07
+30 Codeforces Round #402 (Div. 2)
+1
+20 lib.util.InputReader
+19 java.io.PrintWriter
+0
+1
