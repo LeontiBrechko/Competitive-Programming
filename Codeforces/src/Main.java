@@ -5,9 +5,7 @@ import java.io.PrintWriter;
 import java.util.StringTokenizer;
 import java.io.IOException;
 import java.io.BufferedReader;
-import java.util.ArrayDeque;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.io.InputStream;
 
 /**
@@ -22,73 +20,54 @@ public class Main {
         OutputStream outputStream = System.out;
         InputReader in = new InputReader(inputStream);
         PrintWriter out = new PrintWriter(outputStream);
-        TaskC solver = new TaskC();
+        TaskD solver = new TaskD();
         solver.solve(1, in, out);
         out.close();
     }
 
     static
     @SuppressWarnings("Duplicates")
-    class TaskC {
+    class TaskD {
+        int tLength;
+        int pLength;
+        String t;
+        String p;
+        int[] a;
+        int[] aIndex;
+
         public void solve(int testNumber, InputReader in, PrintWriter out) {
-            int n = in.nextInt();
-            ArrayList<Integer>[] adj = new ArrayList[n];
-            for (int i = 0; i < n; i++) adj[i] = new ArrayList<>();
-            int u, v;
-            for (int i = 0; i < n - 1; i++) {
-                u = in.nextInt() - 1;
-                v = in.nextInt() - 1;
-                adj[u].add(v);
-                adj[v].add(u);
-            }
-            int[] c = new int[n];
-            for (int i = 0; i < n; i++) c[i] = in.nextInt();
-            for (int i = 0; i < n; i++) {
-                for (Integer j : adj[i]) {
-                    if (c[i] != c[j]) {
-                        if (dfs(n, adj, c, i)) {
-                            out.printf("YES\n%d", i + 1);
-                            return;
-                        } else if (dfs(n, adj, c, j)) {
-                            out.printf("YES\n%d", j + 1);
-                            return;
-                        } else {
-                            out.print("NO");
-                            return;
-                        }
-                    }
+            t = in.next();
+            p = in.next();
+            tLength = t.length();
+            pLength = p.length();
+            a = new int[tLength];
+            aIndex = new int[tLength];
+            for (int i = 0; i < tLength; i++) aIndex[a[i] = in.nextInt() - 1] = i;
+
+            int low = 0;
+            int high = tLength;
+            int mid;
+            while (low < high) {
+                mid = (low + high + 1) >>> 1;
+                if (isPossible(mid)) {
+                    low = mid;
+                } else {
+                    high = mid - 1;
                 }
             }
 
-            out.print("YES\n1");
+            out.print(low);
         }
 
-        private boolean dfs(int n, ArrayList<Integer>[] adj, int[] c, int root) {
-            boolean[] isVisited;
-            ArrayDeque<Integer> stack;
-            int u;
-
-            for (Integer i : adj[root]) {
-                isVisited = new boolean[n];
-                stack = new ArrayDeque<>();
-                isVisited[root] = true;
-                isVisited[i] = true;
-                stack.push(i);
-                boolean isOk = true;
-                while (!stack.isEmpty()) {
-                    if (!isOk) break;
-                    u = stack.poll();
-                    for (Integer v : adj[u]) {
-                        if (!isVisited[v]) {
-                            isOk = isOk && c[v] == c[i];
-                            isVisited[v] = true;
-                            stack.push(v);
-                        }
-                    }
+        private boolean isPossible(int numberToDelete) {
+            int length = 0;
+            for (int i = 0, j = 0; i < tLength && j < pLength; i++) {
+                if (aIndex[i] >= numberToDelete && t.charAt(i) == p.charAt(j)) {
+                    length++;
+                    j++;
                 }
-                if (!isOk) return false;
             }
-            return true;
+            return length == pLength;
         }
 
     }

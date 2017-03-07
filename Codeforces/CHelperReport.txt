@@ -1,2 +1,2 @@
-37 src/tasks/C - Timofey and a tree.task
+30 src/tasks/D - String Game.task
 0
