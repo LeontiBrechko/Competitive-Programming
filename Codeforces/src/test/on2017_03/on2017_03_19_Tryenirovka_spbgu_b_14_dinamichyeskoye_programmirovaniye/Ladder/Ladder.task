@@ -1,0 +1,27 @@
+6 Ladder
+6 SINGLE
+6 CUSTOM
+9 ladder.in
+6 CUSTOM
+10 ladder.out
+1
+0
+10 3
+1 -1 1
+2
+1 2
+1
+9 src/tasks
+16 -Xmx256m -Xss64m
+4 Main
+98 test.on2017_03.on2017_03_19_Tryenirovka_spbgu_b_14_dinamichyeskoye_programmirovaniye.Ladder.Ladder
+39 net.egork.chelper.checkers.TokenChecker
+0 
+0
+10 2017.03.19
+56 Tryenirovka-spbgu-b-14-dinamichyeskoye-programmirovaniye
+1
+20 lib.util.InputReader
+19 java.io.PrintWriter
+0
+1
