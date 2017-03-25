@@ -1,0 +1,39 @@
+11 C - Berzerk
+6 SINGLE
+8 STANDARD
+-1
+8 STANDARD
+-1
+2
+0
+16 5
+2 3 2
+3 1 2 3
+
+35 Lose Win Win Loop
+Loop Win Win Win
+
+1
+1
+18 8
+4 6 2 3 4
+2 3 6
+
+61 Win Win Win Win Win Win Win
+Lose Win Lose Lose Win Lose Lose
+
+1
+9 src/tasks
+8 -Xmx256M
+4 Main
+76 test.on2017_03.on2017_03_23_Codeforces_Round__406__Div__2_.C___Berzerk.TaskC
+39 net.egork.chelper.checkers.TokenChecker
+0 
+0
+10 2017.03.23
+30 Codeforces Round #406 (Div. 2)
+1
+20 lib.util.InputReader
+19 java.io.PrintWriter
+0
+1
