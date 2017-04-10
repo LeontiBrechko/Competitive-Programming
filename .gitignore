@@ -2,4 +2,9 @@ Books/
 .DS_Store
 .idea
 out/
-Main.java
+**/Main.java
+Codeforces/src/tasks/
+HackerRank/src/tasks/
+InfoScripts/codeforcesstats/target/
+InfoScripts/uva/.ipynb_checkpoints/
+**/CHelperReport.txt

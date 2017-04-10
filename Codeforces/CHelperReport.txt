@@ -1,2 +1,2 @@
-30 src/tasks/D - String Game.task
+49 src/tasks/B - Masha and geometric depression.task
 0
