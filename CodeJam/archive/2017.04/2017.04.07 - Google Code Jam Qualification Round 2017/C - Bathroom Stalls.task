@@ -1,0 +1,35 @@
+19 C - Bathroom Stalls
+12 MULTI_NUMBER
+12 LOCAL_REGEXP
+22 C-(small|large).*[.]in
+6 CUSTOM
+5 c.out
+1
+0
+31 5
+4 2
+5 2
+6 2
+1000 1000
+1000 1
+
+68 Case #1: 1 0
+Case #2: 1 0
+Case #3: 1 1
+Case #4: 0 0
+Case #5: 500 499
+1
+9 src/tasks
+8 -Xmx512M
+4 Main
+11 tasks.TaskC
+39 net.egork.chelper.checkers.TokenChecker
+0 
+0
+10 2017.04.07
+40 Google Code Jam Qualification Round 2017
+1
+20 lib.util.InputReader
+19 java.io.PrintWriter
+1
+1
