@@ -2,6 +2,7 @@ import java.io.OutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.HashSet;
 import java.util.StringTokenizer;
 import java.io.IOException;
 import java.io.BufferedReader;
@@ -20,54 +21,45 @@ public class Main {
         OutputStream outputStream = System.out;
         InputReader in = new InputReader(inputStream);
         PrintWriter out = new PrintWriter(outputStream);
-        TaskD solver = new TaskD();
+        TaskB solver = new TaskB();
         solver.solve(1, in, out);
         out.close();
     }
 
     static
     @SuppressWarnings("Duplicates")
-    class TaskD {
-        int tLength;
-        int pLength;
-        String t;
-        String p;
-        int[] a;
-        int[] aIndex;
-
+    class TaskB {
         public void solve(int testNumber, InputReader in, PrintWriter out) {
-            t = in.next();
-            p = in.next();
-            tLength = t.length();
-            pLength = p.length();
-            a = new int[tLength];
-            aIndex = new int[tLength];
-            for (int i = 0; i < tLength; i++) aIndex[a[i] = in.nextInt() - 1] = i;
-
-            int low = 0;
-            int high = tLength;
-            int mid;
-            while (low < high) {
-                mid = (low + high + 1) >>> 1;
-                if (isPossible(mid)) {
-                    low = mid;
-                } else {
-                    high = mid - 1;
-                }
+            long b1 = in.nextInt();
+            int q = in.nextInt();
+            int l = in.nextInt();
+            int m = in.nextInt();
+            HashSet<Long> a = new HashSet<>();
+            for (int i = 0; i < m; i++) {
+                a.add(in.nextLong());
             }
 
-            out.print(low);
-        }
-
-        private boolean isPossible(int numberToDelete) {
-            int length = 0;
-            for (int i = 0, j = 0; i < tLength && j < pLength; i++) {
-                if (aIndex[i] >= numberToDelete && t.charAt(i) == p.charAt(j)) {
-                    length++;
-                    j++;
+            if (Math.abs(b1) > l) out.print(0);
+            else if (b1 == 0 || q == 1) {
+                if (a.contains(b1)) out.print(0);
+                else out.print("inf");
+            } else if (q == -1) {
+                if (a.contains(b1) && a.contains(-b1)) out.print(0);
+                else out.print("inf");
+            } else if (q == 0) {
+                if (a.contains(0L)) {
+                    if (a.contains(b1)) out.print(0);
+                    else out.print(1);
+                } else out.print("inf");
+            } else {
+                long res = 0;
+                long b = b1;
+                while (Math.abs(b) <= l) {
+                    if (!a.contains(b)) res++;
+                    b = b * (long) q;
                 }
+                out.print(res);
             }
-            return length == pLength;
         }
 
     }
@@ -82,6 +74,10 @@ public class Main {
 
         public int nextInt() {
             return Integer.parseInt(next());
+        }
+
+        public long nextLong() {
+            return Long.parseLong(next());
         }
 
         public String next() {
