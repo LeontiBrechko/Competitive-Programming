@@ -1,0 +1,32 @@
+5 TaskN
+6 SINGLE
+8 STANDARD
+9 input.txt
+8 STANDARD
+10 output.txt
+1
+0
+21 2 5
+100 110
+5 5 1 4 6
+23 100
+110
+112
+120
+122
+130
+1
+9 src/tasks
+16 -Xmx256m -Xss64m
+4 Main
+11 tasks.TaskN
+39 net.egork.chelper.checkers.TokenChecker
+0 
+0
+10 2017.04.28
+62 2016-2017 ACM-ICPC Pacific Northwest Regional Contest (Div. 2)
+1
+20 lib.util.InputReader
+19 java.io.PrintWriter
+0
+1

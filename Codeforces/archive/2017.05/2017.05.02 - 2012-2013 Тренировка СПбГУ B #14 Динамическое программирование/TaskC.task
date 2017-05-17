@@ -1,0 +1,31 @@
+5 TaskC
+6 SINGLE
+6 CUSTOM
+11 aquarium.in
+6 CUSTOM
+12 aquarium.out
+1
+0
+91 5
+0 183 163 173 181
+183 0 165 172 171
+163 165 0 189 302
+173 172 189 0 167
+181 171 302 167 0
+13 666
+1 3 2 5 4
+1
+9 src/tasks
+16 -Xmx256m -Xss64m
+4 Main
+11 tasks.TaskC
+39 net.egork.chelper.checkers.TokenChecker
+0 
+0
+10 2017.05.02
+105 2012-2013 Тренировка СПбГУ B #14 Динамическое программирование
+1
+20 lib.util.InputReader
+19 java.io.PrintWriter
+0
+1
