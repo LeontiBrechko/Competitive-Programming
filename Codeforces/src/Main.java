@@ -2,8 +2,8 @@ import java.io.OutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.HashSet;
 import java.util.StringTokenizer;
+import java.util.HashMap;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -21,45 +21,43 @@ public class Main {
         OutputStream outputStream = System.out;
         InputReader in = new InputReader(inputStream);
         PrintWriter out = new PrintWriter(outputStream);
-        TaskB solver = new TaskB();
+        TaskE solver = new TaskE();
         solver.solve(1, in, out);
         out.close();
     }
 
     static
     @SuppressWarnings("Duplicates")
-    class TaskB {
-        public void solve(int testNumber, InputReader in, PrintWriter out) {
-            long b1 = in.nextInt();
-            int q = in.nextInt();
-            int l = in.nextInt();
-            int m = in.nextInt();
-            HashSet<Long> a = new HashSet<>();
-            for (int i = 0; i < m; i++) {
-                a.add(in.nextLong());
-            }
+    class TaskE {
+        int n;
+        int m;
+        int[] w;
+        int[] c;
+        HashMap<Integer, HashMap<Integer, Long>> dp;
 
-            if (Math.abs(b1) > l) out.print(0);
-            else if (b1 == 0 || q == 1) {
-                if (a.contains(b1)) out.print(0);
-                else out.print("inf");
-            } else if (q == -1) {
-                if (a.contains(b1) && a.contains(-b1)) out.print(0);
-                else out.print("inf");
-            } else if (q == 0) {
-                if (a.contains(0L)) {
-                    if (a.contains(b1)) out.print(0);
-                    else out.print(1);
-                } else out.print("inf");
-            } else {
-                long res = 0;
-                long b = b1;
-                while (Math.abs(b) <= l) {
-                    if (!a.contains(b)) res++;
-                    b = b * (long) q;
-                }
-                out.print(res);
+        public void solve(int testNumber, InputReader in, PrintWriter out) {
+            n = in.nextInt();
+            m = in.nextInt();
+            w = new int[n];
+            c = new int[n];
+            for (int i = 0; i < n; i++) {
+                w[i] = in.nextInt();
+                c[i] = in.nextInt();
             }
+            dp = new HashMap<>();
+            for (int i = 0; i < n; i++) dp.put(i, new HashMap<>());
+            out.print(knapsack(0, m));
+        }
+
+        private long knapsack(int id, int remaining) {
+            if (remaining == 0) return 0;
+            if (remaining < 0) return Integer.MIN_VALUE;
+            if (id == n) return 0;
+            if (dp.get(id).getOrDefault(remaining, -1L) != -1) return dp.get(id).get(remaining);
+
+            long result = Math.max(knapsack(id + 1, remaining - w[id]) + c[id], knapsack(id + 1, remaining));
+            dp.get(id).put(remaining, result);
+            return result;
         }
 
     }
@@ -74,10 +72,6 @@ public class Main {
 
         public int nextInt() {
             return Integer.parseInt(next());
-        }
-
-        public long nextLong() {
-            return Long.parseLong(next());
         }
 
         public String next() {
