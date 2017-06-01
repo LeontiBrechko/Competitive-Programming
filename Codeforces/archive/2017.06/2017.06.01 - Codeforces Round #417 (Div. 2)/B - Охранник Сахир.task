@@ -1,0 +1,54 @@
+31 B - Охранник Сахир
+6 SINGLE
+8 STANDARD
+9 input.txt
+8 STANDARD
+10 output.txt
+4
+0
+14 2 2
+0010
+0100
+
+2 5
+
+1
+1
+25 3 4
+001000
+000010
+000010
+
+3 12
+
+1
+2
+28 4 3
+01110
+01110
+01110
+01110
+
+3 18
+
+1
+3
+13 2 2
+0000
+0000
+1 0
+1
+9 src/tasks
+8 -Xmx256M
+4 Main
+11 tasks.TaskB
+39 net.egork.chelper.checkers.TokenChecker
+0 
+0
+10 2017.06.01
+30 Codeforces Round #417 (Div. 2)
+1
+20 lib.util.InputReader
+19 java.io.PrintWriter
+0
+1
