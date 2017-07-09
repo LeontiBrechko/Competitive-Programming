@@ -1,0 +1,42 @@
+36 B - Экспресс до мечты
+6 SINGLE
+8 STANDARD
+9 input.txt
+8 STANDARD
+10 output.txt
+3
+0
+22 5
+1 2 3 4 3
+1 2 5 4 5
+
+-1
+1
+1
+22 5
+4 4 2 3 1
+5 4 5 3 1
+
+-1
+1
+2
+18 4
+1 1 3 4
+1 4 3 4
+
+-1
+1
+9 src/tasks
+8 -Xmx256M
+4 Main
+11 tasks.TaskB
+39 net.egork.chelper.checkers.TokenChecker
+0 
+0
+10 2017.06.12
+30 Codeforces Round #418 (Div. 2)
+1
+20 lib.util.InputReader
+19 java.io.PrintWriter
+0
+1
