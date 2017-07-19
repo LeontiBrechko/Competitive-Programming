@@ -1,0 +1,37 @@
+20 B - Keyboard Layouts
+6 SINGLE
+8 STANDARD
+-1
+8 STANDARD
+-1
+2
+0
+69 qwertyuiopasdfghjklzxcvbnm
+veamhjsgqocnrbfxdtwkylupzi
+TwccpQZAvb2017
+
+15 HelloVKCup2017
+
+1
+1
+71 mnbvcxzlkjhgfdsapoiuytrewq
+asdfghjklqwertyuiopzxcvbnm
+7abaCABAABAcaba7
+
+17 7uduGUDUUDUgudu7
+
+1
+9 src/tasks
+8 -Xmx256M
+4 Main
+11 tasks.TaskB
+39 net.egork.chelper.checkers.TokenChecker
+0 
+0
+10 2017.07.13
+61 Codeforces Round #424 (Div. 2, rated, based on VK Cup Finals)
+1
+20 lib.util.InputReader
+19 java.io.PrintWriter
+0
+1
