@@ -1,0 +1,43 @@
+5 TaskC
+6 SINGLE
+8 STANDARD
+9 input.txt
+8 STANDARD
+10 output.txt
+3
+0
+23 4
+1010
+2 3 3 4
+3 1 2 3
+
+1 4
+1
+1
+27 5
+01100
+1 2 3 4 5
+1 5 5 2 3
+2 10
+1
+2
+22 4
+0101
+3 4 3 4
+1 1 1 1
+1 2
+1
+9 src/tasks
+16 -Xmx256m -Xss64m
+4 Main
+11 tasks.TaskC
+39 net.egork.chelper.checkers.TokenChecker
+0 
+0
+10 2017.08.02
+11 CS Round 40
+1
+20 lib.util.InputReader
+19 java.io.PrintWriter
+0
+1
