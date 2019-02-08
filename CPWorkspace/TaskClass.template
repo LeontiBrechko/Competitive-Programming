@@ -2,9 +2,78 @@ package %package%;
 
 import %InputClassFQN%;
 import %OutputClassFQN%;
+import java.math.BigInteger;
 
 @SuppressWarnings("Duplicates")
 public class %TaskClass% {
-    public void solve(int testNumber, %InputClass% in, %OutputClass% out) {
+    InputReader in;
+
+    public void solve(int testNumber, InputReader in, PrintWriter out) {
+        this.in = in;
+        
+    }
+
+    private int[] nia(int size) {
+        return in.nextIntArray(size);
+    }
+
+    private long[] nla(int size) {
+        return in.nextLongArray(size);
+    }
+
+    private double[] nda(int size) {
+        return in.nextDoubleArray(size);
+    }
+
+    private String[] nsa(int size) {
+        return in.nextStringArray(size);
+    }
+
+    private boolean[][] nbt(int rows, int columns, char trueCharacter) {
+        return in.nextBooleanTable(rows, columns, trueCharacter);
+    }
+
+    private char[][] nct(int rows, int columns) {
+        return in.nextCharTable(rows, columns);
+    }
+
+    private int[][] nit(int rows, int columns) {
+        return in.nextIntTable(rows, columns);
+    }
+
+    private long[][] nlt(int rows, int columns) {
+        return in.nextLongTable(rows, columns);
+    }
+
+    private double[][] ndt(int rows, int columns) {
+        return in.nextDoubleTable(rows, columns);
+    }
+
+    private int ni() {
+        return in.nextInt();
+    }
+
+    private long nl() {
+        return in.nextLong();
+    }
+
+    private double nd() {
+        return in.nextDouble();
+    }
+
+    private BigInteger nbi() {
+        return in.nextBigInteger();
+    }
+
+    private boolean hasNext() {
+        return in.hasNext();
+    }
+
+    private String next() {
+        return in.next();
+    }
+
+    private String readLine() {
+        return in.readLine();
     }
 }

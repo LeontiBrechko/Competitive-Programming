@@ -3,12 +3,50 @@ package %package%;
 import net.egork.chelper.task.Test;
 import net.egork.chelper.tester.TestCase;
 
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
+import java.util.stream.*;
 
 public class %TestCaseClass% {
-    @TestCase
     public Collection<Test> createTests() {
-        return Collections.emptyList();
+        Random random = new Random();
+        List<Test> testList = new ArrayList<>();
+        StringBuilder input, array;
+
+        int b = 100;
+        int k = (int) 1e5;
+        int maxA = b;
+        array = IntStream.range(0, k).mapToObj(i -> maxA)
+                .reduce(new StringBuilder(),
+                        (builder, integer) -> builder.append(integer).append(" "),
+                        StringBuilder::append);
+
+        input = nextInput();
+        appendAll(input, b, " ", k, "\n", array);
+        testList.add(new Test(input.toString()));
+
+        for (int i = 0; i < 100; i++) {
+            b = 2 + random.nextInt(99);
+            k = 1 + random.nextInt((int) 1e5);
+
+            int max = b;
+            array = IntStream.range(0, k).mapToObj(index -> random.nextInt(max))
+                    .reduce(new StringBuilder(),
+                            (builder, integer) -> builder.append(integer).append(" "),
+                            StringBuilder::append);
+
+            input = nextInput();
+            appendAll(input, b, " ", k, "\n", array);
+            testList.add(new Test(input.toString()));
+        }
+
+        return testList;
+    }
+
+    private StringBuilder nextInput() {
+        return new StringBuilder();
+    }
+
+    private void appendAll(StringBuilder builder, Object... object) {
+        for (Object o : object) builder.append(o);
     }
 }
